@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="page" id="page1">
+        <div class="gallery">
+            <div class="gallery-item"><img src="foto-kamu.JPG" alt="Foto 1"></div>
+            <div class="gallery-item"><img src="gift.JPG" alt="Foto 2"></div>
+            <div class="gallery-item"><img src="foto-kamu.JPG" alt="Foto 3"></div>
+            <div class="gallery-item"><img src="gift.JPG" alt="Foto 4"></div>
+            <div class="gallery-item"><img src="foto-kamu.JPG" alt="Foto 5"></div>
+            <div class="gallery-item"><img src="gift.JPG" alt="Foto 6"></div>
+        </div>
+        <h1 class="birthday-title">Happy Birthday, Sayang! ❤️</h1>
+        <p class="scroll-hint">Scroll ke bawah untuk kejutan berikutnya...</p>
+    </div>
+
+    <div class="page" id="page2">
+        <div class="camera-container">
+            <video id="camera" autoplay></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+            <button id="capture">Ambil Selfie</button>
+        </div>
+        <button id="share" style="display:none;">Bagikan ke WhatsApp</button>
+    </div>
+
+    <div class="page" id="page3">
+        <div class="gift-container">
+            <h2>Masukkan Kode Hadiah</h2>
+            <input type="text" id="giftCode" placeholder="Masukkan kode...">
+            <button id="submitCode">Buka Hadiah</button>
+            <div id="giftReveal" style="display:none;">
+                <h3>🎁 Selamat! Ini Hadiahmu!</h3>
+                <!-- Tambahkan konten hadiah di sini -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

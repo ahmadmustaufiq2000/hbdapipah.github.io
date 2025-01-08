@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    scroll-snap-align: start;
+}
+
+#page1 {
+    background: linear-gradient(45deg, #ff6b6b, #ffc3a0);
+}
+
+.main-image {
+    max-width: 80%;
+    max-height: 60vh;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+#page2 {
+    background: linear-gradient(45deg, #a8e6cf, #dcedc1);
+}
+
+.camera-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
+}
+
+#camera {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4757;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+#page3 {
+    background: linear-gradient(45deg, #ffd3b6, #ffaaa5);
+}
+
+.gift-container {
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+#giftCode {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #ff4757;
+    border-radius: 5px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.birthday-title {
+    margin-top: 20px;
+    font-size: 2.5em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: bounce 2s infinite;
+}
+
+.scroll-hint {
+    color: white;
+    font-size: 1.2em;
+    margin-top: 10px;
+    animation: float 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+} 
