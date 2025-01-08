@@ -5,48 +5,94 @@ document.addEventListener('DOMContentLoaded', function() {
         bgMusic.play();
     }, { once: true });
 
-    // Kamera dan Selfie
+    // Fungsi untuk membuat efek love berterbangan
+    function createLove() {
+        const loveContainer = document.getElementById('loveContainer');
+        const love = document.createElement('div');
+        love.innerHTML = '❤️';
+        love.className = 'love';
+        love.style.left = Math.random() * 100 + 'vw';
+        loveContainer.appendChild(love);
+        
+        setTimeout(() => {
+            love.remove();
+        }, 4000);
+    }
+
+    // Jalankan efek love setiap 300ms
+    setInterval(createLove, 300);
+
+    // Kamera dan selfie logic
+    const startCameraBtn = document.getElementById('startCamera');
+    const cameraPermissionBtn = document.getElementById('cameraPermissionBtn');
     const camera = document.getElementById('camera');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('capture');
+    const previewContainer = document.getElementById('previewContainer');
+    const photoPreview = document.getElementById('photoPreview');
+    const retakeBtn = document.getElementById('retake');
     const shareBtn = document.getElementById('share');
-    let photoData = null;
 
-    // Meminta izin akses kamera
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
+    let stream = null;
+
+    startCameraBtn.addEventListener('click', async () => {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
             camera.srcObject = stream;
-        })
-        .catch(err => {
-            console.error('Error accessing camera:', err);
-        });
+            camera.style.display = 'block';
+            captureBtn.style.display = 'block';
+            cameraPermissionBtn.style.display = 'none';
+        } catch (err) {
+            alert('Error mengakses kamera: ' + err.message);
+        }
+    });
 
-    // Mengambil foto
     captureBtn.addEventListener('click', () => {
         canvas.width = camera.videoWidth;
         canvas.height = camera.videoHeight;
         canvas.getContext('2d').drawImage(camera, 0, 0);
-        photoData = canvas.toDataURL('image/jpeg');
-        shareBtn.style.display = 'block';
+        
+        photoPreview.src = canvas.toDataURL('image/png');
+        camera.style.display = 'none';
+        captureBtn.style.display = 'none';
+        previewContainer.style.display = 'block';
     });
 
-    // Berbagi ke WhatsApp
-    shareBtn.addEventListener('click', () => {
-        const phoneNumber = "6282323405877";
-        const message = encodeURIComponent("Ini selfie ulang tahunku! Kode hadiahku adalah: LOVE2024");
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    retakeBtn.addEventListener('click', () => {
+        camera.style.display = 'block';
+        captureBtn.style.display = 'block';
+        previewContainer.style.display = 'none';
     });
 
-    // Verifikasi kode hadiah
-    const giftCode = document.getElementById('giftCode');
-    const submitCode = document.getElementById('submitCode');
-    const giftReveal = document.getElementById('giftReveal');
+    shareBtn.addEventListener('click', async () => {
+        try {
+            // Konversi canvas ke blob
+            const blob = await new Promise(resolve => {
+                canvas.toBlob(resolve, 'image/png');
+            });
 
-    submitCode.addEventListener('click', () => {
-        if(giftCode.value === 'HBD_SAYANG') {
-            giftReveal.style.display = 'block';
-        } else {
-            alert('Kode tidak valid. Coba lagi!');
+            // Buat file dari blob
+            const file = new File([blob], 'birthday-selfie.png', { type: 'image/png' });
+
+            // Cek apakah browser mendukung Web Share API
+            if (navigator.share && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: 'Birthday Selfie',
+                });
+            } else {
+                // Fallback untuk browser yang tidak mendukung Web Share API
+                const imageUrl = canvas.toDataURL('image/png');
+                const newTab = window.open();
+                newTab.document.body.innerHTML = `
+                    <img src="${imageUrl}" alt="Birthday Selfie">
+                    <p>Klik kanan pada gambar dan pilih "Simpan gambar" untuk menyimpan, 
+                       lalu bagikan melalui WhatsApp</p>
+                `;
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+            alert('Maaf, terjadi kesalahan saat membagikan foto. Silakan coba simpan gambar secara manual.');
         }
     });
 }); 
