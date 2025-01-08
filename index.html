@@ -11,6 +11,8 @@
         <source src="lagu.mp3" type="audio/mp3">
     </audio>
 
+    <div class="love-container" id="loveContainer"></div>
+
     <div class="page" id="page1">
         <div class="gallery">
             <div class="gallery-item"><img src="foto-kamu.JPG" alt="Foto 1"></div>
@@ -26,11 +28,20 @@
 
     <div class="page" id="page2">
         <div class="camera-container">
-            <video id="camera" autoplay></video>
+            <div id="cameraPermissionBtn">
+                <button id="startCamera">Mulai Kamera</button>
+            </div>
+            <video id="camera" autoplay style="display:none;"></video>
             <canvas id="canvas" style="display:none;"></canvas>
-            <button id="capture">Ambil Selfie</button>
+            <button id="capture" style="display:none;">Ambil Selfie</button>
+            <div id="previewContainer" style="display:none;">
+                <img id="photoPreview" src="" alt="Preview foto">
+                <div class="preview-buttons">
+                    <button id="retake">Ambil Ulang</button>
+                    <button id="share">Bagikan ke WhatsApp</button>
+                </div>
+            </div>
         </div>
-        <button id="share" style="display:none;">Bagikan ke WhatsApp</button>
     </div>
 
     <div class="page" id="page3">
