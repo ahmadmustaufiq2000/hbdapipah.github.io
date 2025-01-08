@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 await navigator.share({
                     files: [file],
                     title: 'Birthday Selfie',
+                    text: 'Ini foto selfie saya untuk mendapatkan kode selanjutnya. Mohon berikan kode berikutnya 🙏'
                 });
             } else {
                 // Fallback untuk browser yang tidak mendukung Web Share API
@@ -86,8 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newTab = window.open();
                 newTab.document.body.innerHTML = `
                     <img src="${imageUrl}" alt="Birthday Selfie">
-                    <p>Klik kanan pada gambar dan pilih "Simpan gambar" untuk menyimpan, 
-                       lalu bagikan melalui WhatsApp</p>
+                    <p>Klik kanan pada gambar dan pilih "Simpan gambar" untuk menyimpan.</p>
+                    <p>Lalu bagikan ke WhatsApp dengan pesan:</p>
+                    <p><em>"Ini foto selfie saya untuk mendapatkan kode selanjutnya. Mohon berikan kode berikutnya 🙏"</em></p>
                 `;
             }
         } catch (error) {
