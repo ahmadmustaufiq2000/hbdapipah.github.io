@@ -132,7 +132,23 @@ button:hover {
 
 @media (max-width: 768px) {
     .gallery {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .message-item {
+        font-size: 1em;
+        padding: 12px;
+        margin: 8px 0;
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+
+    .gallery-item img {
+        height: 100%;
     }
 }
 
@@ -182,4 +198,17 @@ button:hover {
     display: flex;
     gap: 10px;
     justify-content: center;
+}
+
+.message-item {
+    text-align: center;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #ff69b4;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    line-height: 1.5;
 } 
